@@ -20,9 +20,4 @@
 package net.minecraftforge.gradle.version;
 
 public class ProjectVersion {
-    public static final String VERSION = "@@PROJECT_VERSION@@";
-
-    public static final String BRANCH = "@@GIT_BRANCH@@";
-
-    public static final String FULL_VERSION = VERSION + "-" + BRANCH;
 }

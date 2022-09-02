@@ -19,8 +19,6 @@
  */
 package net.minecraftforge.gradle.patcher;
 
-import club.chachy.GitVersion;
-import club.chachy.data.GitData;
 import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -823,14 +821,7 @@ public class PatcherPlugin extends BasePlugin<PatcherExtension> {
         CreateStartTask makeProperties = makeTask(projectString(TASK_PROJECT_MAKE_PROPERTIES, patcher), CreateStartTask.class);
         {
             makeProperties.addResource("net/minecraftforge/gradle/version/ProjectVersion.java");
-            GitData propertyData;
-            if (getExtension().isGitVersion()) {
-                propertyData = GitVersion.Companion.invoke(project.getProjectDir());
-            } else {
-                propertyData = new GitData("unknown", project.getVersion().toString());
-            }
-            makeProperties.addReplacement("@@PROJECT_VERSION@@", propertyData.getCommit());
-            makeProperties.addReplacement("@@GIT_BRANCH@@", propertyData.getBranch());
+
             makeProperties.setStartOut(subWorkspace(patcher.getCapName() + DIR_EXTRACTED_START));
             makeProperties.setDoesCache(false);
             makeProperties.getOutputs().upToDateWhen(CALL_FALSE); //TODO: Abrar, Fix this...
